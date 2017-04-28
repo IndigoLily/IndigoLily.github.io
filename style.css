@@ -2,13 +2,13 @@ body {
     margin: 0;
     padding: 0;
     font-family: sans-serif;
-    font-family: "Poppins", sans-serif;
+    font-family: 'Poppins', sans-serif;
     text-align: center;
     background-color: #efe8e0;
 }
 #topHead {
     background-color: #006A52;
-    height: 50vmin;
+    height: 45vmin;
     box-shadow: 0 0 4vmin #000;
     position: relative;
     z-index: -1;
@@ -42,7 +42,7 @@ a {
     padding: .5vmin;
 }
 .jp {
-    font-family: "MS Gothic", sans-serif;
+    font-family: 'MS Gothic', sans-serif;
     font-weight: 900;
 }
 .card img {
