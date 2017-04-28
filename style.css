@@ -4,7 +4,7 @@ body {
     font-family: sans-serif;
     font-family: "Poppins", sans-serif;
     text-align: center;
-    background-color: #cacccb;
+    background-color: #efe8e0;
 }
 #topHead {
     background-color: #006A52;
@@ -46,6 +46,6 @@ a {
     font-weight: 900;
 }
 .card img {
-    width: 50vmin;
-    vertical-align: bottom;
+    height: 30vmin;
+    vertical-align: top;
 }
