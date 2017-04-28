@@ -1,0 +1,51 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    font-family: "Poppins", sans-serif;
+    text-align: center;
+    background-color: #cacccb;
+}
+#topHead {
+    background-color: #006A52;
+    height: 50vmin;
+    box-shadow: 0 0 4vmin #000;
+    position: relative;
+    z-index: -1;
+}
+#topHead h1 {
+    margin: 0;
+    padding: 5vmin 0 0 0;
+    color: #fff;
+    font-size: 15vmin;
+}
+a {
+    color: #444;
+    text-decoration: none;
+}
+#links {
+    position: relative;
+    top: -15vmin;
+}
+.card {
+    background-color: #fff;
+    display: inline-block;
+    margin: 2vmin;
+    box-shadow: 0 .1vmin 1vmin rgba(0,0,0,.5);
+    transition: box-shadow .2s;
+}
+.card:hover {
+    box-shadow: 0 .3vmin 5vmin rgba(0,0,0,.5);
+}
+.card header {
+    font-size: 2.5vmin;
+    padding: .5vmin;
+}
+.jp {
+    font-family: "MS Gothic", sans-serif;
+    font-weight: 900;
+}
+.card img {
+    width: 50vmin;
+    vertical-align: bottom;
+}
