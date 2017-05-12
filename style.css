@@ -28,11 +28,11 @@ a {
     position: relative;
     /*top: -15vmin;*/
 }
-@media (orientation:landscape) {
+/*@media (orientation:landscape) {
     #links {
       columns: 20vw 3;
     }
-}
+}*/
 .card {
     background-color: #fff;
     display: inline-block;
