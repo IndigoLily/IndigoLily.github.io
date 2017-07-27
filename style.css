@@ -26,22 +26,21 @@ a {
 }
 #links {
   position: relative;
-  /*top: -15vmin;*/
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 5vmin;
+  width: calc(100% - 14vmin);
+  left: 7vmin;
+  top: 5vmin;
+  margin-bottom: 7vmin;
 }
-/*@media (orientation:landscape) {
-  #links {
-    columns: 20vw 3;
-  }
-}*/
 .card {
   background-color: #fff;
-  display: inline-block;
-  margin: 2vmin;
-  box-shadow: 0 .1vmin 1vmin rgba(0,0,0,.5);
+  box-shadow: 0 .1vmin 2vmin rgba(0,0,0,.2);
   transition: box-shadow .2s;
 }
 .card:hover {
-  box-shadow: 0 .3vmin 5vmin rgba(0,0,0,.5);
+  box-shadow: 0 .3vmin 5vmin rgba(0,0,0,.3);
 }
 .card header {
   font-size: 2.5vmin;
@@ -53,9 +52,7 @@ a {
   font-weight: 900;
 }
 .card img {
-  max-width: 30vw;
-  max-height: 33vh;
-  min-width: 29px;
-  min-height: 29px;
+  width: 100%;
+  height: auto;
   vertical-align: bottom;
 }
