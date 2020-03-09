@@ -1,0 +1,38 @@
+html {
+  height: 100%;
+  overflow: hidden;
+  background-color: #08080a;
+  text-align: center;
+}
+
+body {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#container {
+  cursor: none;
+}
+
+.row {
+  margin: 0;
+  padding: 0;
+  height: 2vmin;
+  width: auto;
+  white-space: nowrap;
+}
+
+.row + .row {
+  margin-top: 0vmin;
+}
+
+.dot {
+  display: inline-block;
+  width:  2vmin;
+  height: 2vmin;
+  border-radius: 100%;
+  background-color: #fff;
+}

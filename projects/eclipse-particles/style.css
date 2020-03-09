@@ -1,0 +1,27 @@
+html {
+    overflow: hidden;
+    background-color: #000;
+}
+
+body {
+    margin: 0;
+}
+
+#cover {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    width:  33vmin;
+    height: 33vmin;
+
+    background-color: #000;
+    border: 0.5vmin solid #fff;
+    border-radius: 100%;
+}
+
+#cover:active {
+    width: 32vmin;
+    height: 32vmin;
+}
