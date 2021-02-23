@@ -33,13 +33,28 @@ function draw() {
     const a = A(b);
     const r = R(a, b);
 
-    ctx.fillStyle = '#f00';
-    ctx.fillRect(0, 0, w, h);
-    ctx.fillStyle = '#00f';
-    ctx.fillRect(w/2 + a * scale, 0, w, h);
+    ctx.shadowColor = '#000';
+
+    {
+	const x = w/2 + a*scale;
+
+	let red = ctx.createLinearGradient(x, 0, 0, 0);
+	red.addColorStop(1, '#600');
+	red.addColorStop(0, '#f00');
+	ctx.fillStyle = red;
+	ctx.fillRect(0, 0, w, h);
+
+	let blue = ctx.createLinearGradient(x, 0, w, 0);
+	blue.addColorStop(1, '#006');
+	blue.addColorStop(0, '#00f');
+	ctx.fillStyle = blue;
+	ctx.fillRect(x, 0, w, h);
+    }
 
     ctx.lineWidth = 1;
     ctx.fillStyle = ctx.strokeStyle = '#000';
+
+    ctx.shadowBlur = 0;
 
 
 
