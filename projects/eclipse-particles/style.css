@@ -19,6 +19,8 @@ body {
     background-color: #000;
     border: 0.5vmin solid #fff;
     border-radius: 100%;
+
+    cursor: pointer;
 }
 
 #cover:active {
