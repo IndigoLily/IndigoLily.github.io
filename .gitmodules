@@ -1,3 +1,0 @@
-[submodule "dnd-map"]
-	path = geos
-	url = https://github.com/IndigoLily/dnd-map.git
