@@ -1,67 +1,51 @@
-var sequence = [false];
-var frames = 0;
-var rate = 10;
-var add = true;
-
-function circle(colour) {
-  this.r = 1;
-  this.colour = colour; // boolean, black/white
-  this.grow = function() {
-    this.r = add ? this.r + rate : this.r * rate;
-  }
-  this.draw = function() {
-    noStroke();
-    fill( this.colour ? 255 : 0 );
-    ellipse( 0, 0, this.r, this.r );
-  }
-}
-
-var circles = [];
-
-function iterate() {
-  var length = sequence.length;
-  for( let i = 0; i < length; i++ ) {
-    sequence.push(!sequence[i]);
-  }
-  console.log(sequence.length);
-}
-
-function setup() {
-  // var size = Math.floor((windowWidth > windowHeight ? windowHeight : windowWidth));
-  createCanvas(windowWidth,windowHeight);
-  background(255);
-}
-
-function draw() {
-  translate(width/2,height/2);
-  if( frames >= sequence.length ) {
-    iterate();
-  }
-  if( !(frameCount % 10) ) {
-    circles.push( new circle(sequence[frames++]) );
-  }
-  for( let i = 0; i < circles.length; i++ ) {
-    circles[i].grow();
-    circles[i].draw();
-  }
-  for( let i = circles.length-1; i >= 0; i-- ) {
-    if( circles[i].r > 1+(width**2 + height**2)**.5) {
-      circles.splice(i,1);
-      console.log("removed");
+"use strict";
+const cnv = document.body.appendChild(document.createElement('canvas'));
+const ctx = cnv.getContext('2d');
+function thueMorse(n) {
+    if (!Number.isInteger(n) || n < 0) {
+        throw new Error("Must be a non-negative integer");
     }
-  }
+    let ones = 0;
+    while (n > 0) {
+        ones += n % 2;
+        n >>>= 1;
+    }
+    return ones % 2 === 0;
 }
-
-function windowResized() {
-  resizeCanvas(windowWidth,windowHeight);
+const start = performance.now();
+const speed = 1 / 1000;
+let width, height, diag, tmWidth;
+let needsResize = true;
+function resize() {
+    needsResize = false;
+    width = cnv.width = window.innerWidth + 1;
+    height = cnv.height = window.innerHeight + 1;
+    diag = Math.hypot(width, height);
+    tmWidth = diag / 64;
 }
-
-function add(n_rate) {
-  add = true;
-  rate = n_rate;
-}
-
-function mult(n_rate) {
-  add = false;
-  rate = n_rate;
+window.onload = () => requestAnimationFrame(draw);
+window.addEventListener('resize', () => { needsResize = true; });
+function draw(T) {
+    const t = (T - start) * speed;
+    if (needsResize) {
+        resize();
+    }
+    else {
+        ctx.resetTransform();
+    }
+    ctx.clearRect(0, 0, width, height);
+    ctx.translate(width / 2, height / 2);
+    let idx = t | 0, R, r;
+    do {
+        R = (t - idx) * tmWidth;
+        r = R - tmWidth;
+        if (thueMorse(idx)) {
+            ctx.beginPath();
+            ctx.arc(0, 0, Math.max(0, R), 0, Math.PI * 2, true);
+            ctx.arc(0, 0, Math.max(0, r - 1), 0, Math.PI * 2, false);
+            ctx.fill();
+        }
+        idx -= 1;
+    } while (idx >= 0 && r < diag / 2);
+    requestAnimationFrame(draw);
 }
