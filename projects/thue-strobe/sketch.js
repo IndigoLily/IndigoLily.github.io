@@ -12,21 +12,32 @@ function thueMorse(n) {
     }
     return ones % 2 === 0;
 }
-const start = performance.now();
-const speed = 1 / 1000;
-let width, height, diag, tmWidth;
+const rings = 24;
+let idx = 0;
+let vals = [];
+for (; idx < rings; idx++) {
+    vals.push(thueMorse(idx));
+}
+let width, height, scale;
 let needsResize = true;
 function resize() {
     needsResize = false;
     width = cnv.width = window.innerWidth + 1;
     height = cnv.height = window.innerHeight + 1;
-    diag = Math.hypot(width, height);
-    tmWidth = diag / 64;
+    scale = Math.hypot(width, height) / 2 / (rings - 1);
 }
 window.onload = () => requestAnimationFrame(draw);
 window.addEventListener('resize', () => { needsResize = true; });
-function draw(T) {
-    const t = (T - start) * speed;
+const start = performance.now();
+function draw(now) {
+    const t = (now - start) / 1000;
+    const offset = t % 1 - 1;
+    const newIdx = rings + Math.floor(t);
+    const idxDif = newIdx - idx;
+    vals.splice(0, idxDif);
+    for (; idx < newIdx; idx++) {
+        vals.push(thueMorse(idx));
+    }
     if (needsResize) {
         resize();
     }
@@ -35,17 +46,32 @@ function draw(T) {
     }
     ctx.clearRect(0, 0, width, height);
     ctx.translate(width / 2, height / 2);
-    let idx = t | 0, R, r;
-    do {
-        R = (t - idx) * tmWidth;
-        r = R - tmWidth;
-        if (thueMorse(idx)) {
-            ctx.beginPath();
-            ctx.arc(0, 0, Math.max(0, R), 0, Math.PI * 2, true);
-            ctx.arc(0, 0, Math.max(0, r - 1), 0, Math.PI * 2, false);
-            ctx.fill();
+    ctx.scale(scale, scale);
+    ctx.beginPath();
+    for (let i = 0; i < rings; i++) {
+        if (vals[i]) {
+            const outer = rings - i + offset;
+            const inner = outer - 1;
+            ctx.arc(0, 0, outer, 0, Math.PI * 2, false);
+            if (inner > 0) {
+                if (vals[i + 1]) {
+                    i += 2;
+                    const newInner = inner - 1;
+                    if (newInner > 0) {
+                        ctx.arc(0, 0, newInner, 0, Math.PI * 2, true);
+                    }
+                    else {
+                    }
+                }
+                else {
+                    ctx.arc(0, 0, inner, 0, Math.PI * 2, true);
+                }
+            }
+            else {
+                break;
+            }
         }
-        idx -= 1;
-    } while (idx >= 0 && r < diag / 2);
+    }
+    ctx.fill();
     requestAnimationFrame(draw);
 }

@@ -8,6 +8,8 @@ function thueMorse(n: number): boolean {
 
   let ones = 0;
   while (n > 0) {
+ /* maybe replace with
+    ones += n & 1; */
     ones += n % 2;
     n >>>= 1;
   }
@@ -15,13 +17,16 @@ function thueMorse(n: number): boolean {
   return ones % 2 === 0;
 }
 
-const start = performance.now();
-const speed = 1 / 1000;
+const rings = 24;
+let idx = 0;
+let vals: Array<boolean> = [];
+for (; idx < rings; idx++) {
+  vals.push(thueMorse(idx));
+}
 
-let width:   number,
-    height:  number,
-    diag:    number,
-    tmWidth: number;
+let width:  number,
+    height: number,
+    scale:  number;
 
 let needsResize = true;
 
@@ -30,15 +35,24 @@ function resize() {
 
   width = cnv.width = window.innerWidth + 1;
   height = cnv.height = window.innerHeight + 1;
-  diag = Math.hypot(width, height);
-  tmWidth = diag / 64;
+  scale = Math.hypot(width, height) / 2 / (rings - 1);
 }
 
 window.onload = () => requestAnimationFrame(draw);
 window.addEventListener('resize', () => { needsResize = true; });
 
-function draw(T: number) {
-  const t = (T - start) * speed;
+const start = performance.now();
+
+function draw(now: number) {
+  const t = (now - start) / 1000;
+  const offset = t % 1 - 1;
+
+  const newIdx = rings + Math.floor(t);
+  const idxDif = newIdx - idx;
+  vals.splice(0, idxDif);
+  for (; idx < newIdx; idx++) {
+    vals.push(thueMorse(idx));
+  }
 
   if (needsResize) {
     resize();
@@ -49,22 +63,40 @@ function draw(T: number) {
 
   ctx.clearRect(0, 0, width, height);
   ctx.translate(width / 2, height / 2);
+  ctx.scale(scale, scale);
 
-  let idx = t | 0, R, r;
+  ctx.beginPath();
+  for (let i = 0; i < rings; i++) {
+    if (vals[i]) {
+      const outer = rings - i + offset;
+      const inner = outer - 1;
 
-  do {
-    R = (t - idx) * tmWidth;
-    r = R - tmWidth;
+      ctx.arc(0, 0, outer, 0, Math.PI * 2, false);
 
-    if (thueMorse(idx)) {
-      ctx.beginPath();
-      ctx.arc(0, 0, Math.max(0, R), 0, Math.PI * 2, true);
-      ctx.arc(0, 0, Math.max(0, r - 1), 0, Math.PI * 2, false);
-      ctx.fill();
+      if (inner > 0) {
+        if (vals[i+1]) {
+          // next value is also black
+          // handle it here, and skip the white that is necessarily after it
+          i += 2;
+          const newInner = inner - 1;
+          if (newInner > 0) {
+            // double width ring
+            ctx.arc(0, 0, newInner, 0, Math.PI * 2, true);
+          } else {
+            // circle, not ring
+          }
+        } else {
+          // normal ring
+          ctx.arc(0, 0, inner, 0, Math.PI * 2, true);
+        }
+      } else {
+        // circle, not ring
+        // and no more rings after this
+        break;
+      }
     }
-
-    idx -= 1;
-  } while (idx >= 0 && r < diag / 2)
+  }
+  ctx.fill();
 
   requestAnimationFrame(draw);
 }
