@@ -1,91 +1,96 @@
-import { Vec } from './lib/vec.mjs';
-const { sin, cos, abs, sqrt, min, max, PI } = Math;
-const TAU   = PI * 2,
-      PHI   = (1+sqrt(5))/2,
-      RT2   = sqrt(2);
-
-const cnv  = document.body.appendChild(document.createElement('canvas')),
-      c    = cnv.getContext('2d');
-
-const direction = Math.random() < 0.5 ? 1 : -1;
-const maxAge = 360;
-const correction = 1/30;
-let w,h,inRad,outRad;
-resize();
+import { random, TAU, strengthBase, circle, innerRadius, outerRadius, perpendicularBias } from "./common.js";
+import { Particle } from "./particle.js";
+const { cos, sin, min } = Math;
+let debug = false;
+let heldKeys = new Set();
+window.addEventListener('keydown', ({ key }) => {
+    heldKeys.add(key);
+    if ((heldKeys.has('h') || heldKeys.has(';')) && heldKeys.has('j') && heldKeys.has('k') && heldKeys.has('l')) {
+        debug = !debug;
+    }
+});
+window.addEventListener('keyup', ({ key }) => {
+    heldKeys.delete(key);
+});
+const cnv = document.body.appendChild(document.createElement("canvas"));
+const ctx = cnv.getContext("2d");
+const steps = 10;
+const particles = [];
+let needsResize = true;
+window.addEventListener("resize", () => needsResize = true);
 function resize() {
-    w = cnv.width  = innerWidth;
-    h = cnv.height = innerHeight;
-    inRad  = min(w,h)/5;
-    outRad = min(w,h)/3;
+    needsResize = false;
+    const [w, h] = [cnv.width, cnv.height] = [window.innerWidth, window.innerHeight];
+    ctx.translate(w / 2, h / 2);
+    const scale = min(w, h);
+    ctx.scale(scale, scale);
+    ctx.fillStyle = '#fff';
 }
-window.addEventListener('resize', resize);
-
-
-
-let parts = [];
-
-class Particle {
-    constructor() {
-        this.pos = new Vec(Math.random()*(outRad-inRad)+inRad, 0);
-        this.pos.degs = Math.random()*360;
-        this.vel = new Vec(1 + Math.random(), 0);
-        this.vel.degs = this.pos.degs + direction*(45 + Math.random()*90);
-        this.acc = new Vec();
-        this.age = 0;
-    }
-
-    move() {
-        this.age++;
-        if (this.age < maxAge) {
-            if (this.pos.mag > outRad) {
-                this.acc.add(Vec.scale(this.pos, -1/this.pos.mag*correction));
-            }
-            if (this.pos.mag < inRad) {
-                this.acc.add(Vec.scale(this.pos, 1/this.pos.mag*correction));
-            }
-
-            this.vel.add(this.acc);
-            this.pos.add(this.vel);
-            this.acc.set(0, 0);
+window.onload = () => {
+    let last = performance.now();
+    document.addEventListener('visibilitychange', () => {
+        if (document.visibilityState === 'visible') {
+            last = performance.now();
         }
+    });
+    window.addEventListener('mousedown', ({ button }) => {
+        if (button === 0) {
+            for (const p of particles) {
+                const a = random(0, TAU);
+                const str = random(0, 0.001, 8);
+                p.vel.x += cos(a) * str;
+                p.vel.y += sin(a) * str;
+            }
+        }
+    });
+    requestAnimationFrame(drawFrame);
+    function drawFrame() {
+        if (needsResize) {
+            resize();
+        }
+        ctx.save();
+        ctx.resetTransform();
+        ctx.clearRect(0, 0, cnv.width, cnv.height);
+        ctx.restore();
+        while (random() < 1 / particles.length ** 0.15) {
+            particles.push(new Particle());
+        }
+        const now = performance.now();
+        const dt = now - last;
+        last = now;
+        for (let i = particles.length - 1; i >= 0; i--) {
+            const p = particles[i];
+            for (let u = 0; u < steps; u++) {
+                p.updt(dt / steps);
+            }
+            if (p.age >= Particle.maxAge) {
+                particles.splice(i, 1);
+                continue;
+            }
+            p.draw(ctx);
+        }
+        if (debug) {
+            ctx.globalAlpha = 1;
+            ctx.save();
+            ctx.lineWidth = strengthBase - 0.999;
+            ctx.strokeStyle = '#0f0';
+            circle(ctx, 0, 0, innerRadius, "stroke");
+            ctx.strokeStyle = '#00f';
+            circle(ctx, 0, 0, outerRadius, "stroke");
+            {
+                ctx.lineWidth = 0.003;
+                ctx.fillStyle = ctx.strokeStyle = '#f00';
+                ctx.translate((innerRadius + outerRadius) / 2, 0);
+                ctx.rotate(TAU / 4);
+                ctx.beginPath();
+                ctx.arc(0, 0, 0.1, -TAU / 4 / perpendicularBias, TAU / 4 / perpendicularBias);
+                ctx.lineTo(0, 0);
+                ctx.closePath();
+                ctx.stroke();
+            }
+            ctx.restore();
+        }
+        requestAnimationFrame(drawFrame);
     }
-
-    draw() {
-        c.beginPath();
-        c.arc(this.pos.x, this.pos.y, min(w,h)/300*(sin(PI*this.age/maxAge)**2), 0, TAU);
-        c.fill();
-    }
-}
-
-function draw(frame = 0) {
-    c.resetTransform();
-    c.fillStyle = '#000';
-    c.fillRect(0, 0, w, h);
-    c.translate(w/2,h/2);
-
-    /*
-    c.strokeStyle = '#f00';
-    c.beginPath();
-    c.arc(0, 0, inRad, 0, TAU);
-    c.stroke();
-    c.beginPath();
-    c.arc(0, 0, outRad, 0, TAU);
-    c.stroke();
-    */
-
-    parts.push(new Particle());
-
-    c.fillStyle = '#fff';
-    for (const part of parts) {
-        part.move();
-        part.draw();
-    }
-
-    if (parts.length >= maxAge) {
-        parts.shift();
-    }
-
-    requestAnimationFrame( () => draw(frame + 1) );
-}
-
-draw();
+    console.debug("initialization done");
+};
