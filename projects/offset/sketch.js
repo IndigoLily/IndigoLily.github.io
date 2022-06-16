@@ -1,54 +1,47 @@
-const w = 20;
-const h = 20;
-
-const container = document.createElement('div');
-container.id = 'container';
-document.body.append(container);
-
-let dots = new Array(w);
-let speeds = [];
-let voff = 0;
-
-for (let i = 0; i < h; i++) {
-  dots[i] = new Array(w);
-
-  let row = document.createElement('div');
-
-  row.classList.add('row');
-  container.append(row);
-
-  for (let j = 0; j < w; j++) {
-    let dot = document.createElement('div');
-    dot.classList.add('dot');
-    row.append(dot);
-    dots[i][j] = dot;
-
-    speeds[i * w + j] = (Math.random() + 1) / 2;
-  }
-}
-
-function draw(start = true) {
-  let milli = Date.now();
-  let offsum = 0;
-
-  for (let i = 0; i < h; i++) {
-    for (let j = 1; j < w; j++) {
-      let offset = Math.sin(milli * speeds[i * w + j] * 0.003) + 1;
-      offsum += offset;
-      dots[i][j].style.marginLeft = offset + 'vmin';
+import { resize, circle } from './svg.js';
+const len = 28;
+const area = len * len;
+const maxWidth = 300 / 4;
+const offsetRatio = 2 / 3;
+const radius = maxWidth / 2 / (len + offsetRatio * len - offsetRatio);
+document.getElementById("css").sheet?.insertRule(`circle { r: ${radius}% }`);
+const circles = new Array();
+const speeds = new Array();
+for (let y = 0; y < len; y++) {
+    for (let x = 0; x < len - 1; x++) {
+        circles.push(circle());
+        speeds.push(Math.random() + 1);
     }
-  }
-
-  let off = offsum/w/w;
-  voff = start ? off : lerp(voff, off, 0.1);
-  document.querySelectorAll('.row + .row')
-    .forEach(row => row.style.marginTop = voff + 'vmin');
-
-  requestAnimationFrame(()=>draw(false));
+    circles.push(circle());
 }
-
-draw();
-
-function lerp(a, b, c) {
-  return a + (b-a) * c;
+function draw(t) {
+    t /= 1000;
+    resize();
+    let vertOffset = 0;
+    for (let y = 0; y < len; y++) {
+        let offsets = new Array();
+        let width = 2 * radius * (len - 1);
+        for (let x = 0; x < len - 1; x++) {
+            const offset = (0.5 - 0.5 * Math.cos(t * speeds[(len - 1) * y + x])) * radius * 2 * offsetRatio;
+            width += offset;
+            offsets.push(offset);
+            vertOffset += offset;
+        }
+        let offset = 50 - width / 2;
+        for (let x = 0; x < len; x++) {
+            circles[y * len + x].setAttribute("cx", `${offset}%`);
+            offset += radius * 2 + offsets[x];
+        }
+    }
+    vertOffset /= area;
+    const height = (2 * radius + vertOffset) * (len - 1);
+    let offset = 50 - height / 2;
+    for (let y = 0; y < len; y++) {
+        const cy = offset + (2 * radius + vertOffset) * y;
+        for (let x = 0; x < len; x++) {
+            circles[y * len + x].setAttribute("cy", `${cy}%`);
+        }
+    }
+    requestAnimationFrame(draw);
 }
+draw(0);
