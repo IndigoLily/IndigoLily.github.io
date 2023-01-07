@@ -10,13 +10,13 @@ jobs:
       - name: Build index.html
         run: echo "test"
 
-  make-webp:
-    steps:
-      - name: Make webp
+  #make-webp:
+  #  steps:
+  #    - name: Make webp
 
-  make-avif:
-    steps:
-      - name: Make AVIF
+  #make-avif:
+  #  steps:
+  #    - name: Make AVIF
 
   #deploy:
   #  needs:
