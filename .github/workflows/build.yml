@@ -14,7 +14,7 @@ jobs:
   build-index:
     steps:
       - name: Build index.html
-        run: for show in $SHOW; do echo "showing: $show"; done
+        run: for show in ${{ env.SHOW }}; do echo "showing: $show"; done
 
   make-webp:
     steps:
