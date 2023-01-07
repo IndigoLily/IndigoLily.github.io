@@ -1,12 +1,6 @@
 on: [push]
 
 env:
-  # Which projects to actually show on the page
-  SHOW:
-    - bobbing-rings
-    - juggle
-    - cloud
-
   # Brightness threshold
   THRESH: 0.2
 
@@ -14,7 +8,7 @@ jobs:
   build-index:
     steps:
       - name: Build index.html
-        run: for show in ${{ env.SHOW }}; do echo "showing: $show"; done
+        run: echo "test"
 
   make-webp:
     steps:
