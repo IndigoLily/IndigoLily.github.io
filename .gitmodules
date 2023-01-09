@@ -1,0 +1,3 @@
+[submodule "projects/bobbing-rings"]
+	path = projects/bobbing-rings
+	url = https://github.com/IndigoLily/bobbing-rings
