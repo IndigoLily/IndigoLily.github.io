@@ -13,3 +13,6 @@
 [submodule "projects/thue-strobe"]
 	path = projects/thue-strobe
 	url = https://github.com/IndigoLily/thue-strobe
+[submodule "projects/eqtri"]
+	path = projects/eqtri
+	url = https://github.com/IndigoLily/eqtri
