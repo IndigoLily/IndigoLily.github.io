@@ -10,3 +10,6 @@
 [submodule "projects/phosphene"]
 	path = projects/phosphene
 	url = https://github.com/IndigoLily/phosphene
+[submodule "projects/thue-strobe"]
+	path = projects/thue-strobe
+	url = https://github.com/IndigoLily/thue-strobe
