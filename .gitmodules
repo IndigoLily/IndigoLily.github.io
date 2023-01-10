@@ -7,3 +7,6 @@
 [submodule "projects/cloud"]
 	path = projects/cloud
 	url = https://github.com/IndigoLily/cloud
+[submodule "projects/phosphene"]
+	path = projects/phosphene
+	url = https://github.com/IndigoLily/phosphene
