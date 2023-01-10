@@ -4,3 +4,6 @@
 [submodule "projects/juggle"]
 	path = projects/juggle
 	url = https://github.com/IndigoLily/juggle
+[submodule "projects/cloud"]
+	path = projects/cloud
+	url = https://github.com/IndigoLily/cloud
