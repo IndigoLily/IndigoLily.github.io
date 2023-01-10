@@ -16,3 +16,6 @@
 [submodule "projects/eqtri"]
 	path = projects/eqtri
 	url = https://github.com/IndigoLily/eqtri
+[submodule "projects/tritiles"]
+	path = projects/tritiles
+	url = https://github.com/IndigoLily/tritiles
