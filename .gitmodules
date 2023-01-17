@@ -40,3 +40,6 @@
 [submodule "projects/offset"]
 	path = projects/offset
 	url = git@github.com:IndigoLily/offset.git
+[submodule "projects/iris"]
+	path = projects/iris
+	url = git@github.com:IndigoLily/iris.git
