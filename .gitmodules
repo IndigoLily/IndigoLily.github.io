@@ -58,3 +58,6 @@
 [submodule "projects/bezier"]
 	path = projects/bezier
 	url = git@github.com:IndigoLily/bezier.git
+[submodule "projects/overlap"]
+	path = projects/overlap
+	url = git@github.com:IndigoLily/overlap.git
