@@ -85,3 +85,6 @@
 [submodule "projects/signals"]
 	path = projects/signals
 	url = git@github.com:IndigoLily/signals.git
+[submodule "projects/ring"]
+	path = projects/ring
+	url = git@github.com:IndigoLily/ring.git
