@@ -34,3 +34,6 @@
 [submodule "projects/mandelbrot"]
 	path = projects/mandelbrot
 	url = git@github.com:IndigoLily/mandelbrot.git
+[submodule "projects/subdivide"]
+	path = projects/subdivide
+	url = git@github.com:IndigoLily/subdivide.git
