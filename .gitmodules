@@ -22,3 +22,9 @@
 [submodule "projects/rotating-tiles"]
 	path = projects/rotating-tiles
 	url = https://github.com/IndigoLily/rotating-tiles
+[submodule "projects/tree-generator"]
+	path = projects/tree-generator
+	url = https://github.com/IndigoLily/tree-generator
+[submodule "projects/corn-popper"]
+	path = projects/corn-popper
+	url = git@github.com:IndigoLily/corn-popper.git
