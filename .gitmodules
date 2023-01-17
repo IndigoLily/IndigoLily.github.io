@@ -82,3 +82,6 @@
 [submodule "projects/rain"]
 	path = projects/rain
 	url = git@github.com:IndigoLily/rain.git
+[submodule "projects/signals"]
+	path = projects/signals
+	url = git@github.com:IndigoLily/signals.git
