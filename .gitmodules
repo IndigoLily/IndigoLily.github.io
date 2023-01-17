@@ -76,3 +76,6 @@
 [submodule "projects/split"]
 	path = projects/split
 	url = git@github.com:IndigoLily/split.git
+[submodule "projects/lattice"]
+	path = projects/lattice
+	url = git@github.com:IndigoLily/lattice.git
