@@ -79,3 +79,6 @@
 [submodule "projects/lattice"]
 	path = projects/lattice
 	url = git@github.com:IndigoLily/lattice.git
+[submodule "projects/rain"]
+	path = projects/rain
+	url = git@github.com:IndigoLily/rain.git
