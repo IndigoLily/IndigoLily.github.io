@@ -91,3 +91,6 @@
 [submodule "projects/burst"]
 	path = projects/burst
 	url = git@github.com:IndigoLily/burst.git
+[submodule "projects/poly"]
+	path = projects/poly
+	url = git@github.com:IndigoLily/poly.git
