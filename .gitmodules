@@ -106,3 +106,6 @@
 [submodule "projects/gol"]
 	path = projects/gol
 	url = git@github.com:IndigoLily/gol.git
+[submodule "projects/dancing-ribbons"]
+	path = projects/dancing-ribbons
+	url = git@github.com:IndigoLily/dancing-ribbons.git
