@@ -61,3 +61,6 @@
 [submodule "projects/overlap"]
 	path = projects/overlap
 	url = git@github.com:IndigoLily/overlap.git
+[submodule "projects/eclipse-particles"]
+	path = projects/eclipse-particles
+	url = git@github.com:IndigoLily/eclipse-particles.git
