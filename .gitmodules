@@ -31,3 +31,6 @@
 [submodule "projects/quadrants"]
 	path = projects/quadrants
 	url = git@github.com:IndigoLily/quadrants.git
+[submodule "projects/mandelbrot"]
+	path = projects/mandelbrot
+	url = git@github.com:IndigoLily/mandelbrot.git
