@@ -46,3 +46,6 @@
 [submodule "projects/paper"]
 	path = projects/paper
 	url = git@github.com:IndigoLily/paper.git
+[submodule "projects/confetti"]
+	path = projects/confetti
+	url = git@github.com:IndigoLily/confetti.git
