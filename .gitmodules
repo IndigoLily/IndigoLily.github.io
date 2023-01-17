@@ -28,3 +28,6 @@
 [submodule "projects/corn-popper"]
 	path = projects/corn-popper
 	url = git@github.com:IndigoLily/corn-popper.git
+[submodule "projects/quadrants"]
+	path = projects/quadrants
+	url = git@github.com:IndigoLily/quadrants.git
