@@ -103,3 +103,6 @@
 [submodule "projects/winding-roads"]
 	path = projects/winding-roads
 	url = git@github.com:IndigoLily/winding-roads.git
+[submodule "projects/gol"]
+	path = projects/gol
+	url = git@github.com:IndigoLily/gol.git
