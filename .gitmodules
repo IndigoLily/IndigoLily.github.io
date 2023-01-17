@@ -43,3 +43,6 @@
 [submodule "projects/iris"]
 	path = projects/iris
 	url = git@github.com:IndigoLily/iris.git
+[submodule "projects/paper"]
+	path = projects/paper
+	url = git@github.com:IndigoLily/paper.git
