@@ -97,3 +97,6 @@
 [submodule "projects/exp-circle"]
 	path = projects/exp-circle
 	url = git@github.com:IndigoLily/exp-circle.git
+[submodule "projects/petri-dish"]
+	path = projects/petri-dish
+	url = git@github.com:IndigoLily/petri-dish.git
