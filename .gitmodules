@@ -94,3 +94,6 @@
 [submodule "projects/poly"]
 	path = projects/poly
 	url = git@github.com:IndigoLily/poly.git
+[submodule "projects/exp-circle"]
+	path = projects/exp-circle
+	url = git@github.com:IndigoLily/exp-circle.git
