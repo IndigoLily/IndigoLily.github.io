@@ -100,3 +100,6 @@
 [submodule "projects/petri-dish"]
 	path = projects/petri-dish
 	url = git@github.com:IndigoLily/petri-dish.git
+[submodule "projects/winding-roads"]
+	path = projects/winding-roads
+	url = git@github.com:IndigoLily/winding-roads.git
