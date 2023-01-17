@@ -67,3 +67,6 @@
 [submodule "projects/repel"]
 	path = projects/repel
 	url = git@github.com:IndigoLily/repel.git
+[submodule "projects/skittle-rain"]
+	path = projects/skittle-rain
+	url = git@github.com:IndigoLily/skittle-rain.git
