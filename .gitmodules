@@ -49,3 +49,6 @@
 [submodule "projects/confetti"]
 	path = projects/confetti
 	url = git@github.com:IndigoLily/confetti.git
+[submodule "projects/hadron"]
+	path = projects/hadron
+	url = git@github.com:IndigoLily/hadron.git
