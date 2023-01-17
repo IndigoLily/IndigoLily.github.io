@@ -64,3 +64,6 @@
 [submodule "projects/eclipse-particles"]
 	path = projects/eclipse-particles
 	url = git@github.com:IndigoLily/eclipse-particles.git
+[submodule "projects/repel"]
+	path = projects/repel
+	url = git@github.com:IndigoLily/repel.git
