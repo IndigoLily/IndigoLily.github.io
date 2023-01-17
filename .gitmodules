@@ -73,3 +73,6 @@
 [submodule "projects/divan"]
 	path = projects/divan
 	url = git@github.com:IndigoLily/divan.git
+[submodule "projects/split"]
+	path = projects/split
+	url = git@github.com:IndigoLily/split.git
