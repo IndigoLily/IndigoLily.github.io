@@ -52,3 +52,6 @@
 [submodule "projects/hadron"]
 	path = projects/hadron
 	url = git@github.com:IndigoLily/hadron.git
+[submodule "projects/flowfield"]
+	path = projects/flowfield
+	url = git@github.com:IndigoLily/flowfield.git
