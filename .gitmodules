@@ -37,3 +37,6 @@
 [submodule "projects/subdivide"]
 	path = projects/subdivide
 	url = git@github.com:IndigoLily/subdivide.git
+[submodule "projects/offset"]
+	path = projects/offset
+	url = git@github.com:IndigoLily/offset.git
