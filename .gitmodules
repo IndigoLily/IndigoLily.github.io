@@ -88,3 +88,6 @@
 [submodule "projects/ring"]
 	path = projects/ring
 	url = git@github.com:IndigoLily/ring.git
+[submodule "projects/burst"]
+	path = projects/burst
+	url = git@github.com:IndigoLily/burst.git
