@@ -55,3 +55,6 @@
 [submodule "projects/flowfield"]
 	path = projects/flowfield
 	url = git@github.com:IndigoLily/flowfield.git
+[submodule "projects/bezier"]
+	path = projects/bezier
+	url = git@github.com:IndigoLily/bezier.git
